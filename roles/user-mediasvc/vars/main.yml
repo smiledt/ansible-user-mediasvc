@@ -1,0 +1,6 @@
+---
+# vars file for user-mediasvc
+
+media_user: mediasvc
+media_group: media
+media_pass: "{{ vault_media_pass }}"

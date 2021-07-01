@@ -1,0 +1,5 @@
+- name: Add the media stack service account.
+  hosts: nfs_client_media
+  become: true
+  roles:
+    - role: user-mediasvc

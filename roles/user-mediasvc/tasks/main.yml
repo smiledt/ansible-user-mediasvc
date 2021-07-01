@@ -1,0 +1,24 @@
+---
+# tasks file for user-mediasvc
+
+- name: Include encrypted variables.
+  include_vars: vault.yml
+
+#Todo: Add fail task to check if there is already a GID/UID of 1099
+
+- name: Ensure the {{ media_group }} group exists.
+  group:
+    name: media
+    state: present
+    gid: 1099
+
+- name: Add the media user {{ media_user }}
+  user:
+    name: "{{ media_user }}"
+    password: "{{ media_pass | password_hash('sha512', 'standardsalt') }}"
+    state: present
+    update_password: always
+    create_home: no
+    group: media
+    uid: 1099
+    shell: /usr/sbin/nologin
